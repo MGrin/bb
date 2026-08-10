@@ -484,6 +484,7 @@ const ONLINE_RPC_RESPONSE_RESULT_FIXTURES: OnlineRpcResponseResultFixtures = {
 };
 
 const SETTLED_RESPONSE_RESULT_FIXTURES: SettledResponseResultFixtures = {
+  "thread.rewind.discard": {},
   "thread.rewind.prepare": {
     providerThreadId: "provider-thread-rewind",
   },
@@ -1054,10 +1055,10 @@ describe("host-daemon local schemas", () => {
 });
 
 describe("host-daemon command schemas", () => {
-  // Version 96 adds provider-native skill discovery roots and staged thread
-  // rewinds. Older daemons must update before connecting.
-  it("uses protocol version 96 for skill discovery and staged rewinds", () => {
-    expect(HOST_DAEMON_PROTOCOL_VERSION).toBe(96);
+  // Version 96 builds on ACP context-window usage from version 95 by adding
+  // provider-native history checkpointing and staged thread rewinds.
+  it("uses protocol version 97 for staged thread rewind cleanup", () => {
+    expect(HOST_DAEMON_PROTOCOL_VERSION).toBe(97);
   });
 
   it("binds Plan cancellation to a required turn id and typed result", () => {
