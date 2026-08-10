@@ -484,6 +484,9 @@ const ONLINE_RPC_RESPONSE_RESULT_FIXTURES: OnlineRpcResponseResultFixtures = {
 };
 
 const SETTLED_RESPONSE_RESULT_FIXTURES: SettledResponseResultFixtures = {
+  "thread.rewind.prepare": {
+    providerThreadId: "provider-thread-rewind",
+  },
   "thread.start": {
     providerThreadId: "provider-thread-123",
   },
@@ -1051,9 +1054,9 @@ describe("host-daemon local schemas", () => {
 });
 
 describe("host-daemon command schemas", () => {
-  // Version 96 adds provider-native skill discovery roots. An older daemon
-  // returns an incomplete skill catalog, so it must update before connecting.
-  it("uses protocol version 96 for provider-native skill discovery", () => {
+  // Version 96 adds provider-native skill discovery roots and staged thread
+  // rewinds. Older daemons must update before connecting.
+  it("uses protocol version 96 for skill discovery and staged rewinds", () => {
     expect(HOST_DAEMON_PROTOCOL_VERSION).toBe(96);
   });
 
