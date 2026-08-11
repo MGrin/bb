@@ -1055,10 +1055,10 @@ describe("host-daemon local schemas", () => {
 });
 
 describe("host-daemon command schemas", () => {
-  // Version 96 builds on ACP context-window usage from version 95 by adding
-  // provider-native history checkpointing and staged thread rewinds.
-  it("uses protocol version 97 for staged thread rewind cleanup", () => {
-    expect(HOST_DAEMON_PROTOCOL_VERSION).toBe(97);
+  // Version 98 adds ownership leases to staged thread rewind commands so
+  // overlapping requests cannot discard each other's provider forks.
+  it("uses protocol version 98 for leased staged thread rewind cleanup", () => {
+    expect(HOST_DAEMON_PROTOCOL_VERSION).toBe(98);
   });
 
   it("binds Plan cancellation to a required turn id and typed result", () => {
