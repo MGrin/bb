@@ -62,7 +62,12 @@ export function useListTasks(
   return useTasksQuery<Task[]>(
     async (rpc, publish) =>
       filters.statuses.length > 0 || activeOnly
-        ? listAllTasks(rpc, { ...query, statuses: [...filters.statuses] })
+        ? listAllTasks(rpc, {
+            ...query,
+            ...(filters.statuses.length > 0
+              ? { statuses: [...filters.statuses] }
+              : {}),
+          })
         : listTasksOpenFirst(rpc, query, publish),
     activeOnly ? ["tasks:changed", "threads:changed"] : ["tasks:changed"],
     [
